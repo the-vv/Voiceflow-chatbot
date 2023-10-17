@@ -1,0 +1,36 @@
+<h2>Chat Messages</h2>
+
+<div *ngFor="let item of response" class="mt-4">
+  <!-- <p *ngFor="let msg  of item">
+    {{getMessages(msg)}}
+  </p> -->
+  
+  <div class="container">
+    <p *ngFor="let msg  of item">
+      {{getMessages(msg)}}
+    </p>
+    <div *ngIf="getButtons(item)?.length">
+      <button *ngFor="let button of getButtons(item)" (click)="sendPrompt(button.request)" class="btn btn-secondary me-2">
+        {{button.name}}
+      </button>
+    </div>
+  </div>
+<!-- 
+  <div *ngIf="getButtons(item)?.length">
+    <button *ngFor="let button of getButtons(item)" (click)="sendPrompt(button.request)">
+      {{button.name}}
+    </button>
+  </div> -->
+</div>
+<div class="row mt-3">
+  <div class="col-10"><input type="text" [(ngModel)]="prompt" class="form-control">
+  </div>
+  <div class="col-2 text-end">
+    <button (click)="sendPrompt(null)" class="btn btn-primary w-100" *ngIf="!loading">
+    Send
+  </button>
+  <div class="spinner-border" role="status" *ngIf="loading">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+</div>
